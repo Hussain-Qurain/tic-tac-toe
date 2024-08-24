@@ -15,6 +15,7 @@ function getComputerChoice(){
 
 function getHumanChoice(){
     let choice = prompt('Pick one of the following: ' + choices);
+    return choice;
 }
 
 function calculateWinner(humanChoice, computerChoice){
@@ -30,9 +31,13 @@ function calculateWinner(humanChoice, computerChoice){
         else if(computerChoice === 'scissors') return 'computer';
     }
     //if human choice is scissors
-    else{
+    else if(humanChoice === 'scissors'){
         if(computerChoice === 'rock') return 'computer';
         else if(computerChoice === 'paper') return 'human';
+    }
+    else{
+        console.alert("You picked an invalid choice");
+        return false;
     }
 }
 
@@ -42,6 +47,11 @@ function play(){
         return 1;
     }
     return false;
+}
+
+function declareScores(humanScore, computerScore){
+    console.log("Human: " +humanScore);
+    console.log("Computer: " +computerScore);
 }
 
 function playRound(){
@@ -54,12 +64,18 @@ function playRound(){
         let winner = calculateWinner(human, computer);
         if(winner === 'human'){
             console.log(`You win! ${human} beats ${computer}`);
+            humanScore++;
+        }
+        else if (winner === 'computer'){
+            console.log(`You lose! ${computer} beats ${human}`)
+            computerScore++;
         }
         else{
-            console.log(`You lose! ${computer} beats ${human}`)
+            console.log("It is a tie!");
         }
+        declareScores(humanScore, computerScore);
+
         keepGoing = play();
-        console.log(keepGoing);
     }
 }
 
